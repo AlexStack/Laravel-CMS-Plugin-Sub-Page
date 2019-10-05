@@ -56,7 +56,7 @@ class SubPageController extends Controller
             $page_ids = explode(',', $form_data['pages_new_order']);
             $old_sort = explode(',', $form_data['pages_old_sort']);
             $new_sort = explode(',', $form_data['pages_new_sort']);
-            if (strlen($new_sort) != strlen($page_ids)) {
+            if (count($new_sort) != count($page_ids)) {
                 return false;
             }
             foreach ($page_ids as $key => $page_id) {
