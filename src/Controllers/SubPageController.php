@@ -3,6 +3,7 @@
 namespace Amila\LaravelCms\Plugins\SubPage\Controllers;
 
 use AlexStack\LaravelCms\Helpers\LaravelCmsHelper;
+use AlexStack\LaravelCms\Models\LaravelCmsPage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
