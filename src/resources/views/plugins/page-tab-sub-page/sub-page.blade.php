@@ -63,7 +63,7 @@
                     @if ( $item->menu_title)
                     [ {{$item->menu_title}} ] -
                     @endif
-                    {{$item->title}} (PID: {{$item->id ?? 0}}, SORT:{{$item->sort_value ?? 0}})
+                    {{$item->title}}
                 </a>
 
                 <a href="../{{$item->id}}/edit" class="text-secondary"><i class="far fa-edit ml-3"></i></a>
@@ -106,8 +106,7 @@
 
 <div class="m-3 text-info tips">
     Tips: Click and hold your mouse on the icon <i class="fas fa-arrows-alt text-secondary"></i>, drag up or down & drop
-    to
-    change the sort order of the sub pages.
+    to change the sort order of the sub pages.
 
     <a class='text-success ml-3 sort-top-level-menu' href="?switch_nav_tab=sub-page&sort_top_level_menu=yes">
         <i class="fas fa-sort mr-1"></i>{{$helper->t('sort_top_level_menu')}}</a>
