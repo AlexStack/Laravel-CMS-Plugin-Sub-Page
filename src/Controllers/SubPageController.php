@@ -86,4 +86,26 @@ class SubPageController extends Controller
     /*
      * Other methods.
      */
+
+    public function flattenParentArray($element, $name = 'parent', $depth = 0)
+    {
+        $result = [];
+
+        $element['depth'] = $depth;
+
+        if (isset($element[$name])) {
+            $children = $element[$name];
+            unset($element[$name]);
+        } else {
+            $children = null;
+        }
+
+        $result[] = $element;
+
+        if (isset($children)) {
+            $result = array_merge($result, $this->flattenParentArray($children, $name, $depth + 1));
+        }
+
+        return $result;
+    }
 }
