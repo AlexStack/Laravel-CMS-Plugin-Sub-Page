@@ -36,9 +36,17 @@ class SubPageController extends Controller
         //exit('Looks good, the plugin\'s edit() method invoked. id='.$id.' <hr> FILE='.__FILE__.' <hr> PAGE TITLE='.$page->title);
 
         if ('yes' == request()->sort_top_level_menu) {
-            $top_level_menus = LaravelCmsPage::whereNull('parent_id')->where('menu_enabled', 1)->orderBy('sort_value', 'desc')->orderBy('id', 'desc')->get();
+            $data['top_level_menus'] = LaravelCmsPage::whereNull('parent_id')->where('menu_enabled', 1)->orderBy('sort_value', 'desc')->orderBy('id', 'desc')->get();
 
-            return $top_level_menus;
+            return $data;
+        } else {
+            $parent_pages = LaravelCmsPage::with('parent:title,menu_title,id,parent_id,menu_enabled,slug,redirect_url,sort_value,status')
+                ->where('id', $id)
+                ->first(['title', 'menu_title', 'id', 'parent_id', 'menu_enabled', 'slug', 'redirect_url', 'sort_value', 'status']);
+
+            $data['flat_parent_pages'] = array_reverse($this->flattenParentArray($parent_pages->toArray()));
+
+            return $data;
         }
 
         return $id;

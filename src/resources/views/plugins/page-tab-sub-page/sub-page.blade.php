@@ -1,9 +1,9 @@
 @if ( isset($page->children) )
 <div class="row justify-content-center mt-3">
-    <div class="col-md-auto">
-        <h2 class="ml-2">{{$page->title}}</h2>
+    <div class="col-md text-truncate">
+        <h2 class="ml-2" title="{{$page->title}}">{{$page->title}}</h2>
     </div>
-    <div class="col-md">
+    <div class="col-md-auto">
         <span class="preview">
             <a class='btn btn-outline-success ml-3' href="{{ $helper->url($page) }}" target="_blank" title="Preview">
                 <i class='fas fa-external-link-square-alt mr-1'></i>{{$helper->t('preview')}}</a>
@@ -20,8 +20,8 @@
     <div class="col-md-12 mt-3">
         <ul id="sortableList" class="list-group all-pages">
             @php
-            $all_items = ( $plugins['sub-page'] instanceof \Illuminate\Database\Eloquent\Collection) ?
-            $plugins['sub-page'] : $page->children;
+            $all_items = isset( $plugins['sub-page']['top_level_menus']) ?
+            $plugins['sub-page']['top_level_menus'] : $page->children;
             @endphp
 
             @forelse ($all_items as $item)
@@ -103,14 +103,38 @@
 <input name="pages_new_sort" id="pages_new_sort" value="" class="form-control" type="hidden" />
 
 
+@if ( isset($plugins['sub-page']['flat_parent_pages']))
+<nav aria-label="breadcrumb" class="mt-4 nav-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item app-name"><i class="fas fa-home text-secondary mr-1"></i><a
+                href="?switch_nav_tab=sub-page&sort_top_level_menu=yes">{{$helper->s('site_name')}}</a>
+        </li>
+        @php
+        foreach( $plugins['sub-page']['flat_parent_pages'] as $parent ){
+        $item = (object) $parent;
+        echo $item->id != $page->id ? '<li class="breadcrumb-item">
+            <a href="../'  . $item->id . '/edit?switch_nav_tab=sub-page" title="' . $item->title .'">' .
+                ($item->menu_title ?? $item->title) . '</a>
+        </li>' : '';
+        }
+        @endphp
 
-<div class="m-3 text-info tips">
+        <li class="breadcrumb-item active" aria-current="page">{{$page->title}}</li>
+    </ol>
+</nav>
+@endif
+
+
+<div class="mb-3 mt-3 text-info tips">
     Tips: Click and hold your mouse on the icon <i class="fas fa-arrows-alt text-secondary"></i>, drag up or down & drop
     to change the sort order of the sub pages.
 
     <a class='text-success ml-3 sort-top-level-menu' href="?switch_nav_tab=sub-page&sort_top_level_menu=yes">
         <i class="fas fa-sort mr-1"></i>{{$helper->t('sort_top_level_menu')}}</a>
 </div>
+
+
+
 <div class="w-100 p-5 m-5"></div>
 
 @if ( !isset($page->children) )

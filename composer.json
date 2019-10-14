@@ -1,6 +1,6 @@
 {
     "name": "alexstack/laravel-cms-plugin-sub-page",
-    "description": "Display sub pages of the current page when you edit a page, drag & drop to change sort orders(sort_value) ",
+    "description": "Display sub pages of the current page when you edit a page, drag & drop to change sort orders(sort_value). Top level menus are also sortable. ",
     "type": "amila-laravel-cms-plugin",
     "homepage": "https://github.com/AlexStack/Laravel-CMS-Plugin-Sub-Page",
     "keywords": [
@@ -16,10 +16,12 @@
     "support": {
         "issues": "https://github.com/AlexStack/Laravel-CMS-Plugin-Sub-Page/issues"
     },
-    "authors": [{
-        "name": "Alex",
-        "homepage": "https://github.com/AlexStack/Laravel-CMS-Plugin-Sub-Page"
-    }],
+    "authors": [
+        {
+            "name": "Alex",
+            "homepage": "https://github.com/AlexStack/Laravel-CMS-Plugin-Sub-Page"
+        }
+    ],
     "require": {
         "php": ">=7.0.0",
         "alexstack/laravel-cms": "*"

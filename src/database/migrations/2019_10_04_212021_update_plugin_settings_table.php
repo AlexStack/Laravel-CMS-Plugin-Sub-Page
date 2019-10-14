@@ -32,7 +32,7 @@ class UpdatePluginSettingsTable extends Migration
 "tab_name" : "<i class=\'fas fa-list-alt mr-1\'></i>__(sub,page)",
 "php_class"  : "Amila\\\\LaravelCms\\\\Plugins\\\\SubPage\\\\Controllers\\\\SubPageController",
 "number_per_page" : 40,
-"display_main_image" : false
+"plugin_type" : "page-tab"
 }',
         ];
         LaravelCmsSetting::UpdateOrCreate(
